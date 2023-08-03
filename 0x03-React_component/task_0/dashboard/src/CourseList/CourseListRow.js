@@ -1,36 +1,37 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-function CourseListRow(props) {
-  if (props.isHeader) {
-    if (props.textSecondCell == null) {
-      return <tr><th colSpan="2">{props.textFirstCell}</th></tr>
-    } else {
-      return (
-        <tr>
-          <th>{props.textFirstCell}</th>
-          <th>{props.textSecondCell}</th>
-        </tr>
-        )
-    }
-  } 
+const CourseListRow = ({ isHeader, textFirstCell, textSecondCell }) => {
   return (
     <tr>
-      <td>{props.textFirstCell}</td>
-      <td>{props.textSecondCell}</td>
+      {isHeader ? (
+        textSecondCell === null ? (
+          <th colSpan='2'>{textFirstCell}</th>
+        ) : (
+          <Fragment>
+            <th>{textFirstCell}</th>
+            <th>{textSecondCell}</th>
+          </Fragment>
+        )
+      ) : (
+        <Fragment>
+          <td>{textFirstCell}</td>
+          <td>{textSecondCell}</td>
+        </Fragment>
+      )}
     </tr>
-  )
-}
+  );
+};
+
+CourseListRow.propTypes = {
+  isHeader: PropTypes.bool,
+  textFirstCell: PropTypes.string.isRequired,
+  textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+};
 
 CourseListRow.defaultProps = {
   isHeader: false,
   textSecondCell: null
-}
+};
 
-CourseListRow.propTypes = {
-  isHeader: PropTypes.bool,
-  textFirstCell: PropTypes.string,
-  textSecondCell: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
-}
-
-export default CourseListRow
+export default CourseListRow;

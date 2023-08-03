@@ -1,7 +1,11 @@
-.App-body {
-    padding: 36px 24px;
-}
+label {
+    padding: 1rem;
+  }
   
-.App-body input {
-    margin: 0 16px 0 8px;
-}
+  label:first-of-type {
+    padding-left: 0;
+  }
+  
+  input + button {
+    margin: 0 2rem;
+  }
